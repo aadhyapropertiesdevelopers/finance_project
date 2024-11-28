@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Auth Page</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="container" class="container sign-in">
+        <div class="row">
+            <!-- Sign-Up Form -->
+            <div class="col align-items-center flex-col sign-up">
+                <div class=" form-wrapper align-items-center">
+                    <form class="form sign-up" method="POST" action="{{ url_for('auth') }}">
+                        <div class="input-group">
+                            <i class="bx bxs-user"></i>
+                            <input type="text" name="username" placeholder="Username" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="bx bx-mail-send"></i>
+                            <input type="email" name="email" placeholder="Email" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="bx bxs-lock-alt"></i>
+                            <input type="password" name="password" placeholder="Password" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="bx bxs-lock-alt"></i>
+                            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+                        </div>
+                        <button type="submit" name="action" value="Sign Up">Sign Up</button>
+                        <p>
+                            <span>Already have an account?</span>
+                            <b onclick="toggleToSignIn()" class="pointer">Sign in here</b>
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <!-- End Sign-Up Form -->
+
+            <!-- Sign-In Form -->
+            <div class="col align-items-center flex-col sign-in">
+                <div class="form-wrapper align-items-center">
+                    <form class="form sign-in" method="POST" action="{{ url_for('auth') }}">
+                        <div class="input-group">
+                            <i class="bx bxs-user"></i>
+                            <input type="text" name="username" placeholder="Username" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="bx bxs-lock-alt"></i>
+                            <input type="password" name="password" placeholder="Password" required>
+                        </div>
+                        <button type="submit" name="action" value="Sign In">Sign In</button>
+                        <p>
+                            <b onclick="toggleToForgotPassword()" class="pointer">Forgot password?</b>
+                        </p>
+                        <p>
+                            <span>Don't have an account?</span>
+                            <b onclick="toggleToSignUp()" class="pointer">Sign up here</b>
+                        </p>
+                    </form>
+                </div>
+            </div>
+            <!-- End Sign-In Form -->
+
+            <!-- Forgot Password Form -->
+             
+            <div class="col align-items-center flex-col forgot-password">
+                <div class="form-wrapper align-items-center">
+                    <div class="form forgot-password">
+                        <div class="input-group">
+                            <i class="bx bx-mail-send"></i>
+                            <input type="email" placeholder="Email" aria-label="Enter your registered email" required>
+                        </div>
+                        <button>
+                            Reset Password
+                        </button>
+                        <p>
+                            <span>Remembered your password?</span>
+                            <b onclick="toggleToSignIn()" class="pointer">Sign in here</b>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            
+             <!-- CONTENT SECTION -->
+        <div class="row content-row">
+            <!-- SIGN IN CONTENT -->
+            <div class="col align-items-center flex-col">
+                <div class="text sign-in">
+                    <h2>Welcome</h2>
+                    <p>Sign in to access your account and stay connected.</p>
+                </div>
+                <div class="img sign-in"></div>
+            </div>
+            
+            <!-- SIGN UP CONTENT -->
+            <div class="col align-items-center flex-col">
+                <div class="img sign-up"></div>
+                <div class="text sign-up">
+                    <h2>Join with us</h2>
+                    <p>Create an account to explore more features.</p>
+                </div>
+            </div>
+            <!-- End Forgot Password Form -->
+        </div>
+    </div>
+    <script src="../static/js/main.js"></script>
+</body>
+</html>
