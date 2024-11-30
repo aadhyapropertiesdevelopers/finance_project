@@ -47,8 +47,9 @@ from flask import Blueprint, request, jsonify
 from ..models.user import User
 from .. import db
 from werkzeug.security import generate_password_hash
+from app.utils.auth_decorators import token_required
 
-bp = Blueprint('main', __name__)
+bp = Blueprint('user', __name__)
 
 # POST method to create a user
 # POST method to create a user
@@ -86,7 +87,8 @@ def create_user():
 
 
 # GET method to fetch all users
-@bp.route('/users', methods=['GET'])
+@bp.route('/user', methods=['GET'])
+# @token_required
 def get_users():
     try:
         # Query all users from the database

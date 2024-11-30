@@ -46,9 +46,17 @@ def create_app():
         db.create_all()
 
     # Register blueprints
-    from .routes import user,login
+    from .routes import user,login,token
     app.register_blueprint(user.bp)
     app.register_blueprint(login.bp)
+    app.register_blueprint(token.bp)
+
+
+    # from app.routes.user import bp as user_bp
+    # from app.routes.login import bp as login_bp
+
+    # app.register_blueprint(user_bp, url_prefix='/user')
+    # app.register_blueprint(login_bp, url_prefix='/auth')
 
     return app
 
