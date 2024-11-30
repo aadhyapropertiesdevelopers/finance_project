@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Create Payment Voucher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color:white;
+            display: flex;
+            flex-direction: column; /* Allow stacking of header and content */
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .header-container {
+            width: 100%;
+            background-color:whitesmoke;
+            color: white;
+            padding: 0px 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align:left;
+            display: flex;
+            justify-content: space-between;
+            align-items: left;
+            /* padding-left: 100px;
+            padding-right: 100px; */
+        }
+        
+
+        .header-container h1 {
+            font-size: 28px;
+            margin: 0;
+            padding-left: 10px;
+            color: black;
+        }
+
+        .header-container p {
+            font-size: 16px;
+            margin-top: 8px;
+            color: #dcdcdc;
+            text-align: left;
+            padding-left: 10px;
+            color: grey;
+        }
+
+        .form-container {
+            width: 95%; /* Increase width to take up more space */
+            max-width: 1600px; /* Set a maximum width for larger screens */
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .form-container .form-title {
+            font-size: 24px;
+            text-align: left;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .inline-form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .inline-form .form-group {
+            width: 48%; /* Keep inputs aligned */
+            margin-bottom: 20px;
+        }
+
+        .inline-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: italic;
+        }
+
+        .inline-form input,
+        .inline-form select,
+        .inline-form textarea {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid hsl(0, 11%, 83%);
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        .form-container button {
+            padding: 15px 30px;
+            background-color: #1b3575;
+            color: #f5edf7;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+            display: block;
+            margin: 20px auto 0;
+        }
+
+        .form-container button:hover {
+            background-color: #100f13;
+        }
+        .header-right {
+            display: flex;
+            align-items: right; /* Vertically center the icons */
+            color: grey;
+            margin-top: 10px;
+            padding-top: 0;
+
+        }
+        .header-right i {
+            font-size: 24px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .header-right i:hover {
+            color: #1b3575;
+        }
+        /* Header left side - Text */
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Align text to the left */
+        }
+
+        .header-left h1 {
+            font-size: 20px;
+            margin: 0;
+            color: black;
+        }
+
+        .header-left p {
+            font-size: 16px;
+            margin-top: 8px;
+            color: grey;
+        }
+
+     
+        
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <div class="header-container">
+       <div class="header-left">
+        <h1>Payment </h1>
+        <p>Create Payment > Payment Invoice </p>
+       
+    </div>
+    <div class="header-right">
+        <i class="fas fa-plus-circle"></i>
+        <i class="fas fa-bars"></i>
+        <i class="fas fa-bell"></i>
+        <i class="fas fa-envelope"></i>
+        <i class="fas fa-cog"></i>
+    </div>
+</div>
+    <!-- Form Section -->
+    <div class="form-container">
+        <div class="form-title">Invoice</div>
+        <form method="POST" action="{{ url_for('submit_payment') }}">
+            <div class="inline-form">
+                <div class="form-group">
+                    <label for="group">Group</label>
+                    <select id="group" name="group">
+                        <option value="supplier">Supplier</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select id="status" name="status">
+                        <option value="paid">Paid</option>
+                        <option value="unpaid">Unpaid</option>
+                        <option value="pending">Pending</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="voucher-number">Voucher Number</label>
+                    <input type="text" id="voucher-number" name="voucher-number" placeholder="Enter Voucher Number" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="account">Account</label>
+                    <input type="text" id="account" name="account" placeholder="Enter Account Name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="payment-type">Payment Type</label>
+                    <select id="payment-type" name="payment-type">
+                        <option value="credit">Credit</option>
+                        <option value="debit">Debit</option>
+                        <option value="transfer">Transfer</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="amount">Amount</label>
+                    <input type="number" id="amount" name="amount" placeholder="Enter Amount" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="reference">Reference</label>
+                    <input type="text" id="reference" name="reference" placeholder="Enter Reference" required>
+                </div>
+                <div class="form-group">
+                    <label for="payment-receipt">Payment Receipt</label>
+                    <input type="file" id="payment-receipt" name="payment-receipt" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="payment-note">Payment Note</label>
+                    <textarea id="payment-note" name="payment-note" placeholder="Enter Payment Note" rows="4"></textarea>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit">Create Now</button>
+        </form>
+    </div>
+</body>
+</html>
