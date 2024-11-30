@@ -25,7 +25,7 @@
 
 #     return app
 
-from flask import Flask
+from flask import Flask,render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
@@ -46,11 +46,14 @@ def create_app():
         db.create_all()
 
     # Register blueprints
-    from .routes import user,login,token
+    from .routes import user,login,token,dashboard
     app.register_blueprint(user.bp)
     app.register_blueprint(login.bp)
     app.register_blueprint(token.bp)
-
+    app.register_blueprint(dashboard.bp)
+    
+    
+    
 
     # from app.routes.user import bp as user_bp
     # from app.routes.login import bp as login_bp
