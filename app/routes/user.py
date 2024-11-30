@@ -4,7 +4,6 @@ from flask import Blueprint, request, jsonify
 from ..models.user import User
 from .. import db
 from ..services.user_service import user_post_method
-
 bp = Blueprint('main', __name__)
 
 # POST method to create a user
