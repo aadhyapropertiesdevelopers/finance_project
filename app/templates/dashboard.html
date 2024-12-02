@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard with Dynamic Content</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="static/styles.css">
+  
+</head>
+<body>
+  <!-- Full-screen header -->
+  <header class="full-screen-header">
+    Dashboard Overview
+  </header>
+
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="user-info">
+        <div class="profile-picture">
+          <i class="fas fa-user-circle" style="font-size: 50px;"></i>
+        </div>
+        <div>
+          <h3>Admin User</h3>
+          <p>Role</p>
+        </div>
+      </div>
+      <nav class="menu">
+        <a href="#" class="active">
+          <i class="fas fa-home"></i> Dashboard
+        </a>
+        <a href="#bank">
+          <i class="fas fa-university"></i> Bank
+          <i class="fas fa-chevron-right arrow-icon"></i>
+        </a>
+        <a href="#payment" class="toggle-submenu">
+          <i class="fas fa-money-check-alt"></i> Payment
+          <i class="fas fa-chevron-right arrow-icon" id="payment-arrow"></i>
+        </a>
+        <div class="submenu" id="payment-submenu" style="display: none;">
+          <a href="#" id="create-payment-link"> <span class="dot"></span>Create Payment
+            <i class="fas fa-chevron-right arrow-icon" id="create-payment-arrow" ></i>
+          </a>
+          <div class="submenu" id="create-payment-submenu" style="display: none;">
+            <a href="#" id="payment-voucher-link">Payment Voucher</a>
+            <a href="#" id="payment-invoice-link">Payment Invoice</a>
+          </div>
+          <a href="#" id="payment-list-link"><span class="dot"></span>Payment List
+            <i class="fas fa-chevron-right arrow-icon"id="payment-list-arrow"></i>
+          </a> <!-- New link for Payment List -->
+  <div class="submenu" id="payment-list-submenu" style="display: none;">
+    <a href="#" id="payment-list-voucher-link">Payment List Voucher</a>
+    <a href="#" id="payment-list-invoice-link">Payment List Invoice</a>
+  </div>
+
+        </div>
+        <a href="#">
+          <i class="fas fa-file-alt"></i> Voucher
+          <i class="fas fa-chevron-right arrow-icon"></i>
+        </a>
+        <a href="#">
+          <i class="fas fa-book"></i> Ledger
+          <i class="fas fa-chevron-right arrow-icon"></i>
+        </a>
+        <a href="#">
+          <i class="fas fa-file-invoice-dollar"></i> Bill
+          <i class="fas fa-chevron-right arrow-icon"></i>
+        </a>
+        <a href="#">
+          <i class="fas fa-sms"></i> SMS
+          <i class="fas fa-chevron-right arrow-icon"></i>
+        </a>
+        <a href="#">
+          <i class="fas fa-users"></i> People
+          <i class="fas fa-chevron-right arrow-icon"></i>
+        </a>
+        <a href="#">
+          <i class="fas fa-user-cog"></i> User Management
+          <i class="fas fa-chevron-right arrow-icon"></i>
+        </a>
+        <a href="#">
+          <i class="fas fa-chart-line"></i> Reports
+          <i class="fas fa-chevron-right arrow-icon"></i>
+        </a>
+        <a href="#">
+          <i class="fas fa-building"></i> Company
+          <i class="fas fa-chevron-right arrow-icon"></i>
+        </a>
+        <a href="#">
+          <i class="fas fa-building"></i> Administrative Tools
+          <i class="fas fa-chevron-right arrow-icon"></i>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <div class="main-content" id="main-content">
+      <h1>Welcome to the Dashboard</h1>
+          <!-- <p>Click on the menu items to display content here.</p> -->
+    </div>
+  </div>
+  <script>
+      // JavaScript to toggle the payment submenu and rotate the arrow
+   document.querySelector('.toggle-submenu').addEventListener('click', function(e) {
+      e.preventDefault(); // Prevent default link behavior
+
+      const paymentSubmenu = document.getElementById('payment-submenu');
+      const paymentArrow = document.getElementById('payment-arrow');
+      
+      // Toggle the submenu visibility
+      if (paymentSubmenu.style.display === 'none' || paymentSubmenu.style.display === '') {
+        paymentSubmenu.style.display = 'block';
+      } else {
+        paymentSubmenu.style.display = 'none';
+      }
+
+      // Toggle the arrow rotation
+      paymentArrow.classList.toggle('down');
+    });
+
+document.querySelector('#create-payment-link').addEventListener('click', function(e) {
+  e.preventDefault(); // Prevent default link behavior
+
+  const createPaymentSubmenu = document.getElementById('create-payment-submenu');
+  const createPaymentArrow = document.getElementById('create-payment-arrow');
+  
+  // Toggle the submenu visibility
+  if (createPaymentSubmenu.style.display === 'none' || createPaymentSubmenu.style.display === '') {
+    createPaymentSubmenu.style.display = 'block';
+  } else {
+    createPaymentSubmenu.style.display = 'none';
+  }
+
+  // Toggle the arrow rotation
+  createPaymentArrow.classList.toggle('down');
+});
+
+// JavaScript to toggle the "Payment List" submenu and rotate the arrow
+document.querySelector('#payment-list-link').addEventListener('click', function(e) {
+  e.preventDefault(); // Prevent default link behavior
+
+  const paymentListSubmenu = document.getElementById('payment-list-submenu');
+  const paymentListArrow = document.getElementById('payment-list-arrow');
+  
+  // Toggle the submenu visibility
+  if (paymentListSubmenu.style.display === 'none' || paymentListSubmenu.style.display === '') {
+    paymentListSubmenu.style.display = 'block';
+  } else {
+    paymentListSubmenu.style.display = 'none';
+  }
+
+  // Toggle the arrow rotation
+  paymentListArrow.classList.toggle('down');
+});
+
+/*code for payment list voucher*/
+document.getElementById('payment-list-voucher-link').addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const mainContent = document.getElementById('main-content');
+  mainContent.innerHTML = `
+    <div class="container mt-4">
+      <div class="page-header">
+            <div>
+                <h5 class="card-title mb-3">Payment List</h5>
+                <h5>Payment > payment list</h5>
+            </div>
+            <!-- Icons on the right side -->
+            <div class="header-icons">
+                <i class="fas fa-bell"></i> <!-- Bell icon -->
+                <i class="fas fa-bars"></i> <!-- Menu icon -->
+                <i class="fas fa-plus-square"></i> <!-- + Box icon -->
+                <i class="fas fa-envelope"></i> <!-- Mail icon -->
+                <i class="fas fa-cogs"></i> <!-- Settings icon -->
+            </div>
+        </div>
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-3">Voucher</h5>
+          <div class="action-buttons mb-3">
+            <button class="btn btn-warning">+ Create Payment</button>
+            <button class="btn btn-primary">
+              <i class="fas fa-upload ms-2"></i> Import List
+            </button>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6 custom-container">
+              <input type="text" class="form-control custom-input" placeholder="Search List">
+            </div>
+            <div class="col-md-6 text-end">
+              <button class="btn btn-outline-primary">Filter</button>
+              <button class="btn btn-outline-secondary ms-2">
+                <i class="fas fa-file-pdf" style="color: orangered;"></i>
+              </button>
+              <button class="btn btn-outline-secondary ms-2">
+                <i class="fas fa-file-csv" style="color: green;"></i>
+              </button>
+              <button class="btn btn-outline-secondary ms-2">
+                <i class="fas fa-print" style="color: blue;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <table class="table" id="voucherTable">
+            <thead>
+              <tr>
+                <th scope="col"><input type="checkbox"></th>
+                <th scope="col">Date</th>
+                <th scope="col">Name</th>
+                <th scope="col">Group Name</th>
+                <th scope="col">Voucher</th>
+                <th scope="col">Account</th>
+                <th scope="col">Payment Type</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody id="voucherTableBody">
+              <!-- Rows will be added dynamically -->
+            </tbody>
+          </table>
+        </div>
+        <!-- Pagination Section -->
+        <div class="card-footer d-flex justify-content-between align-items-center">
+          <!-- Rows per page (Left) -->
+          <div class="d-flex align-items-center">
+            <label for="rowsPerPage" class="me-2 mb-0">Rows per page:</label>
+            <select id="rowsPerPage" class="form-select d-inline-block w-auto">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15" selected>15</option>
+              <option value="20">20</option>
+            </select>
+          </div>
+          <!-- Pagination Controls (Center) -->
+          <div id="pagination" class="d-flex justify-content-center align-items-center">
+            <!-- Pagination buttons will be inserted here dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  const rows = [
+    { date: "01/01/2022", name: "Joseph Tylor", group: "Supplier", voucher: "565", account: "Cash", paymentType: "Cash", amount: "$56,921" },
+    { date: "02/01/2022", name: "Paul Freeman", group: "Supplier", voucher: "025", account: "Cash", paymentType: "Cash", amount: "$47,202" },
+    { date: "03/01/2022", name: "Matthew Smallwood", group: "Supplier", voucher: "710", account: "Bank", paymentType: "Cheque", amount: "$47,285" },
+    { date: "04/01/2022", name: "Danyelle Lundy", group: "Vendor", voucher: "369", account: "Bank", paymentType: "Cheque", amount: "$39,600" },
+    { date: "05/01/2022", name: "Glenn Weiner", group: "Customer", voucher: "582", account: "Bank", paymentType: "Cash", amount: "$22,740" },
+    { date: "06/01/2022", name: "Sarah Connor", group: "Vendor", voucher: "789", account: "Bank", paymentType: "Cheque", amount: "$14,380" },
+    { date: "07/01/2022", name: "John Doe", group: "Supplier", voucher: "567", account: "Cash", paymentType: "Cash", amount: "$23,000" },
+  ];
+
+  let rowsPerPage = 15;
+  let currentPage = 1;
+
+  function renderTable() {
+    const start = (currentPage - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+    const paginatedRows = rows.slice(start, end);
+
+    const tableBody = document.getElementById('voucherTableBody');
+    tableBody.innerHTML = "";
+
+    paginatedRows.forEach((row, index) => {
+      const tableRow = `
+        <tr>
+          <td><input type="checkbox"></td>
+          <td>${row.date}</td>
+          <td>${row.name}</td>
+          <td>${row.group}</td>
+          <td>${row.voucher}</td>
+          <td>${row.account}</td>
+          <td>${row.paymentType}</td>
+          <td>${row.amount}</td>
+          <td>
+            <div class="action-dropdown">
+            <button class="btn btn-sm btn-outline-secondary toggle-action" type="button">
+              Action
+            </button>
+            <div class="action-options d-none">
+              <button class="btn btn-sm btn-link text-primary"><i class="fas fa-edit"></i> Edit</button>
+              <button class="btn btn-sm btn-link text-danger"><i class="fas fa-trash-alt"></i>Delete</button>
+            </div>
+          </div>
+        </td>
+      </tr>`;
+    tableBody.insertAdjacentHTML("beforeend", tableRow);
+
+    // Get the action button and the action options (hidden by default)
+    const actionButton = tableBody.lastChild.querySelector('.toggle-action');
+    const actionOptions = tableBody.lastChild.querySelector('.action-options');
+
+    actionButton.addEventListener('click', () => {
+      // Hide all other action options
+      document.querySelectorAll('.action-options').forEach((el) => el.classList.add('d-none'));
+
+      // Toggle the visibility of the current row's action options
+      actionOptions.classList.toggle('d-none');
+    });
+    });
+  }
+
+  function renderPagination() {
+    const totalPages = Math.ceil(rows.length / rowsPerPage);
+    const paginationDiv = document.getElementById('pagination');
+    paginationDiv.innerHTML = "";
+
+    const prevButton = document.createElement("button");
+    prevButton.className = "btn btn-outline-primary mx-1";
+    prevButton.textContent = "<";
+    prevButton.disabled = currentPage === 1;
+
+    prevButton.addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderTable();
+        renderPagination();
+      }
+    });
+
+    paginationDiv.appendChild(prevButton);
+
+    for (let i = 1; i <= totalPages; i++) {
+      const button = document.createElement("button");
+      button.className = `btn ${i === currentPage ? "btn-primary" : "btn-outline-primary"} mx-1`;
+      button.textContent = i;
+
+      button.addEventListener("click", () => {
+        currentPage = i;
+        renderTable();
+        renderPagination();
+      });
+
+      paginationDiv.appendChild(button);
+    }
+
+    const nextButton = document.createElement("button");
+    nextButton.className = "btn btn-outline-primary mx-1";
+    nextButton.textContent = ">";
+    nextButton.disabled = currentPage === totalPages;
+
+    nextButton.addEventListener("click", () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderTable();
+        renderPagination();
+      }
+    });
+
+    paginationDiv.appendChild(nextButton);
+  }
+
+  document.getElementById('rowsPerPage').addEventListener('change', (e) => {
+    rowsPerPage = parseInt(e.target.value, 10);
+    currentPage = 1;
+    renderTable();
+    renderPagination();
+  });
+
+  renderTable();
+  renderPagination();
+});
+
+
+// Handle click on "Payment List - Payments Invoice"
+document.getElementById('payment-list-invoice-link').addEventListener('click', function(e) {
+  e.preventDefault();
+  // Load content for Payment Invoice under Payment List
+  const mainContent = document.getElementById('main-content');
+  mainContent.innerHTML = `
+    <div class="container mt-4">
+       <div class="page-header">
+            <div>
+                <h5 class="card-title mb-3">Payment List</h5>
+                <h5>Payment > payment list</h5>
+            </div>
+            <!-- Icons on the right side -->
+            <div class="header-icons">
+                <i class="fas fa-bell"></i> <!-- Bell icon -->
+                <i class="fas fa-bars"></i> <!-- Menu icon -->
+                <i class="fas fa-plus-square"></i> <!-- + Box icon -->
+                <i class="fas fa-envelope"></i> <!-- Mail icon -->
+                <i class="fas fa-cogs"></i> <!-- Settings icon -->
+            </div>
+        </div>
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-3">Invoice</h5>
+          <div class="action-buttons mb-3">
+            <button class="btn btn-warning">+ Create Payment</button>
+            <button class="btn btn-primary">
+              <i class="fas fa-upload ms-2"></i> Import List
+            </button>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6 custom-container">
+              <input type="text" class="form-control custom-input" placeholder="Search List">
+            </div>
+            <div class="col-md-6 text-end">
+              <button class="btn btn-outline-primary">Filter</button>
+              <button class="btn btn-outline-secondary ms-2">
+                <i class="fas fa-file-pdf" style="color: orangered;"></i>
+              </button>
+              <button class="btn btn-outline-secondary ms-2">
+                <i class="fas fa-file-csv" style="color: green;"></i>
+              </button>
+              <button class="btn btn-outline-secondary ms-2">
+                <i class="fas fa-print" style="color: blue;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <table class="table" id="voucherTable">
+            <thead>
+              <tr>
+                <th scope="col"><input type="checkbox"></th>
+                <th scope="col">Date</th>
+                <th scope="col">Name</th>
+                <th scope="col">Group Name</th>
+                <th scope="col">Voucher</th>
+                <th scope="col">Account</th>
+                <th scope="col">Payment Type</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody id="voucherTableBody">
+              <!-- Rows will be added dynamically -->
+            </tbody>
+          </table>
+        </div>
+        <!-- Pagination Section -->
+        <div class="card-footer d-flex justify-content-between align-items-center">
+          <!-- Rows per page (Left) -->
+          <div class="d-flex align-items-center">
+            <label for="rowsPerPage" class="me-2 mb-0">Rows per page:</label>
+            <select id="rowsPerPage" class="form-select d-inline-block w-auto">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15" selected>15</option>
+              <option value="20">20</option>
+            </select>
+          </div>
+          <!-- Pagination Controls (Center) -->
+          <div id="pagination" class="d-flex justify-content-center align-items-center">
+            <!-- Pagination buttons will be inserted here dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  const rows = [
+    { date: "01/01/2022", name: "Joseph Tylor", group: "Supplier", voucher: "565", account: "Cash", paymentType: "Cash", amount: "$56,921" },
+    { date: "02/01/2022", name: "Paul Freeman", group: "Supplier", voucher: "025", account: "Cash", paymentType: "Cash", amount: "$47,202" },
+    { date: "03/01/2022", name: "Matthew Smallwood", group: "Supplier", voucher: "710", account: "Bank", paymentType: "Cheque", amount: "$47,285" },
+    { date: "04/01/2022", name: "Danyelle Lundy", group: "Vendor", voucher: "369", account: "Bank", paymentType: "Cheque", amount: "$39,600" },
+    { date: "05/01/2022", name: "Glenn Weiner", group: "Customer", voucher: "582", account: "Bank", paymentType: "Cash", amount: "$22,740" },
+    { date: "06/01/2022", name: "Sarah Connor", group: "Vendor", voucher: "789", account: "Bank", paymentType: "Cheque", amount: "$14,380" },
+    { date: "07/01/2022", name: "John Doe", group: "Supplier", voucher: "567", account: "Cash", paymentType: "Cash", amount: "$23,000" },
+  ];
+
+  let rowsPerPage = 15;
+  let currentPage = 1;
+
+  function renderTable() {
+    const start = (currentPage - 1) * rowsPerPage;
+    const end = start + rowsPerPage;
+    const paginatedRows = rows.slice(start, end);
+
+    const tableBody = document.getElementById('voucherTableBody');
+    tableBody.innerHTML = "";
+
+    paginatedRows.forEach((row, index) => {
+      const tableRow = `
+        <tr>
+          <td><input type="checkbox"></td>
+          <td>${row.date}</td>
+          <td>${row.name}</td>
+          <td>${row.group}</td>
+          <td>${row.voucher}</td>
+          <td>${row.account}</td>
+          <td>${row.paymentType}</td>
+          <td>${row.amount}</td>
+          <td>
+            <div class="action-dropdown">
+            <button class="btn btn-sm btn-outline-secondary toggle-action" type="button">
+              Action
+            </button>
+            <div class="action-options d-none">
+              <button class="btn btn-sm btn-link text-primary"><i class="fas fa-edit"></i> Edit</button>
+              <button class="btn btn-sm btn-link text-danger"><i class="fas fa-trash-alt"></i>Delete</button>
+            </div>
+          </div>
+        </td>
+      </tr>`;
+    tableBody.insertAdjacentHTML("beforeend", tableRow);
+
+    // Get the action button and the action options (hidden by default)
+    const actionButton = tableBody.lastChild.querySelector('.toggle-action');
+    const actionOptions = tableBody.lastChild.querySelector('.action-options');
+
+    actionButton.addEventListener('click', () => {
+      // Hide all other action options
+      document.querySelectorAll('.action-options').forEach((el) => el.classList.add('d-none'));
+
+      // Toggle the visibility of the current row's action options
+      actionOptions.classList.toggle('d-none');
+    });
+    });
+  }
+
+  function renderPagination() {
+    const totalPages = Math.ceil(rows.length / rowsPerPage);
+    const paginationDiv = document.getElementById('pagination');
+    paginationDiv.innerHTML = "";
+
+    const prevButton = document.createElement("button");
+    prevButton.className = "btn btn-outline-primary mx-1";
+    prevButton.textContent = "<";
+    prevButton.disabled = currentPage === 1;
+
+    prevButton.addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderTable();
+        renderPagination();
+      }
+    });
+
+    paginationDiv.appendChild(prevButton);
+
+    for (let i = 1; i <= totalPages; i++) {
+      const button = document.createElement("button");
+      button.className = `btn ${i === currentPage ? "btn-primary" : "btn-outline-primary"} mx-1`;
+      button.textContent = i;
+
+      button.addEventListener("click", () => {
+        currentPage = i;
+        renderTable();
+        renderPagination();
+      });
+
+      paginationDiv.appendChild(button);
+    }
+
+    const nextButton = document.createElement("button");
+    nextButton.className = "btn btn-outline-primary mx-1";
+    nextButton.textContent = ">";
+    nextButton.disabled = currentPage === totalPages;
+
+    nextButton.addEventListener("click", () => {
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderTable();
+        renderPagination();
+      }
+    });
+
+    paginationDiv.appendChild(nextButton);
+  }
+
+  document.getElementById('rowsPerPage').addEventListener('change', (e) => {
+    rowsPerPage = parseInt(e.target.value, 10);
+    currentPage = 1;
+    renderTable();
+    renderPagination();
+  });
+
+  renderTable();
+  renderPagination();
+});
+// Handle click on "Payments Voucher" under Create Payment
+document.getElementById('payment-voucher-link').addEventListener('click', function(e) {
+  e.preventDefault();
+  // Load content for Payment Voucher
+  const mainContent = document.getElementById('main-content');
+  mainContent.innerHTML = `
+          <div class="form-container">
+          <!-- Header Section -->
+    <div class="header-container">
+       <div class="header-left">
+        <h1>Payment </h1>
+        <p>Create Payment > Payment Invoice </p>
+       
+    </div>
+    <div class="header-right">
+        <i class="fas fa-plus-circle"></i>
+        <i class="fas fa-bars"></i>
+        <i class="fas fa-bell"></i>
+        <i class="fas fa-envelope"></i>
+        <i class="fas fa-cog"></i>
+    </div>
+</div>
+          <h2>Payment Voucher</h2>
+          <form>
+   
+              <form method="POST" action="{{ url_for('dashboard.submit_payment') }}">
+
+            <div class="form-row">
+        <div class="form-group">
+          <label for="group">Group</label>
+          <select id="group" name="group">
+            <option value="supplier">Supplier</option>
+            <option value="customer">Customer</option>
+            <option value="employee">Employee</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select id="status" name="status">
+            <option value="paid">Paid</option>
+            <option value="unpaid">Unpaid</option>
+            <option value="pending">Pending</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="voucher-number">Voucher Number</label>
+          <input type="text" id="voucher-number" name="voucher-number" placeholder="Enter Voucher Number" required>
+        </div>
+        <div class="form-group">
+          <label for="account">Account</label>
+          <input type="text" id="account" name="account" placeholder="Enter Account Name" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="payment-type">Payment Type</label>
+          <select id="payment-type" name="payment-type">
+            <option value="credit">Credit</option>
+            <option value="debit">Debit</option>
+            <option value="transfer">Transfer</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input type="number" id="amount" name="amount" placeholder="Enter Amount" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input type="date" id="date" name="date" required>
+        </div>
+        <div class="form-group">
+          <label for="reference">Reference</label>
+          <input type="text" id="reference" name="reference" placeholder="Enter Reference" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="payment-receipt">Payment Receipt</label>
+          <input type="file" id="payment-receipt" name="payment-receipt" required>
+        </div>
+        <div class="form-group">
+          <label for="payment-note">Payment Note</label>
+          <textarea id="payment-note" name="payment-note" placeholder="Enter Payment Note" rows="4"></textarea>
+        </div>
+      </div>
+
+      <button type="submit">Create Now</button>
+    </form>
+</div>
+    
+  `;
+});
+
+// Handle click on "Payments Invoice" under Create Payment
+document.getElementById('payment-invoice-link').addEventListener('click', function(e) {
+  e.preventDefault();
+  // Load content for Payment Invoice
+  const mainContent = document.getElementById('main-content');
+  mainContent.innerHTML = `
+        <div class="form-container">
+          <!-- Header Section -->
+    <div class="header-container">
+       <div class="header-left">
+        <h1>Payment </h1>
+        <p>Create Payment > Payment Invoice </p>
+       
+    </div>
+    <div class="header-right">
+        <i class="fas fa-plus-circle"></i>
+        <i class="fas fa-bars"></i>
+        <i class="fas fa-bell"></i>
+        <i class="fas fa-envelope"></i>
+        <i class="fas fa-cog"></i>
+    </div>
+</div>
+          <h2>Payment Invoice</h2>
+          <form>
+            
+              <form method="POST" action="{{ url_for('dashboard.submit_payment') }}">
+
+            <div class="form-row">
+        <div class="form-group">
+          <label for="group">Group</label>
+          <select id="group" name="group">
+            <option value="supplier">Supplier</option>
+            <option value="customer">Customer</option>
+            <option value="employee">Employee</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select id="status" name="status">
+            <option value="paid">Paid</option>
+            <option value="unpaid">Unpaid</option>
+            <option value="pending">Pending</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="voucher-number">Voucher Number</label>
+          <input type="text" id="voucher-number" name="voucher-number" placeholder="Enter Voucher Number" required>
+        </div>
+        <div class="form-group">
+          <label for="account">Account</label>
+          <input type="text" id="account" name="account" placeholder="Enter Account Name" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="payment-type">Payment Type</label>
+          <select id="payment-type" name="payment-type">
+            <option value="credit">Credit</option>
+            <option value="debit">Debit</option>
+            <option value="transfer">Transfer</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input type="number" id="amount" name="amount" placeholder="Enter Amount" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input type="date" id="date" name="date" required>
+        </div>
+        <div class="form-group">
+          <label for="reference">Reference</label>
+          <input type="text" id="reference" name="reference" placeholder="Enter Reference" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="payment-receipt">Payment Receipt</label>
+          <input type="file" id="payment-receipt" name="payment-receipt" required>
+        </div>
+        <div class="form-group">
+          <label for="payment-note">Payment Note</label>
+          <textarea id="payment-note" name="payment-note" placeholder="Enter Payment Note" rows="4"></textarea>
+        </div>
+      </div>
+
+      <button type="submit">Create Now</button>
+    </form>
+</div>
+      `;
+    });
+    
+    // Function to toggle dropdown visibility
+function toggleDropdown(event, button) {
+  event.stopPropagation(); // Prevent bubbling to avoid unwanted closures
+  const dropdown = button.nextElementSibling; // Get the dropdown related to this button
+
+  // Close all other dropdowns
+  document.querySelectorAll('.dropdown-content').forEach(drop => {
+    if (drop !== dropdown) {
+      drop.classList.remove('show');
+    }
+  });
+
+  // Toggle visibility for the clicked dropdown
+  dropdown.classList.toggle('show');
+}
+
+// Handle actions for edit and delete
+function performAction(action, element) {
+  const row = element.closest('.table-row'); // Find the corresponding row
+  const rowData = row.querySelector('td').textContent; // Example: Get the row's first cell content
+
+  if (action === 'edit') {
+    alert(`Edit action on: ${rowData}`); // Replace with your edit logic
+  } else if (action === 'delete') {
+    alert(`Delete action on: ${rowData}`); // Replace with your delete logic
+  }
+}
+
+// Close dropdowns when clicking outside
+document.addEventListener('click', () => {
+  document.querySelectorAll('.dropdown-content').forEach(drop => {
+    drop.classList.remove('show');
+  });
+});
+
+  
+
+
+
+
+
+   
+    
+  </script>
+</body>
+</html>
