@@ -16,12 +16,14 @@ def login_user():
         data = request.get_json()
         email = data['email']
         password = data['password']
+        print(f"Login Attempt: Email - {email}, Password - {password}")  # Debugging log
 
         # Query the database for the user
         user = User.query.filter_by(email=email).first()
 
         # If user does not exist or password does not match
         if not user or not check_password_hash(user.password, password):
+            print("User not found")
             return jsonify({"error": "Invalid email or password."}), 401
         token = encode_jwt(user.id)
 
@@ -33,15 +35,15 @@ def login_user():
 
 
 # GET method to fetch all users
-@bp.route('/login', methods=['GET'])
-def get_users():
-    try:
-        # Query all users from the database
-        users = User.query.all()
+# @bp.route('/login', methods=['GET'])
+# def get_users():
+#     try:
+#         # Query all users from the database
+#         users = User.query.all()
 
-        # Convert the result to a list of dictionaries
-        users_list = [{"id": user.id, "username": user.username, "email": user.email} for user in users]
+#         # Convert the result to a list of dictionaries
+#         users_list = [{"id": user.id, "username": user.username, "email": user.email} for user in users]
 
-        return jsonify(users_list), 200
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+#         return jsonify(users_list), 200
+#     except Exception as e:
+#         return jsonify({"error": str(e)}), 500

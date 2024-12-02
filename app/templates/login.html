@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/fonts/boxicons.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="form-wrapper">
+            <div class="form">
+                <h2>Login</h2>
+                <form onsubmit="loginUser(event)">
+                    <div class="input-group">
+                        <i class="bx bxs-user"></i>
+                        <input type="text" id="login-email" placeholder="Email" aria-label="Enter your email" required>
+                    </div>
+                    <div class="input-group">
+                        <i class="bx bxs-lock-alt"></i>
+                        <input type="password" id="login-password" placeholder="Password" aria-label="Enter your password" required>
+                    </div>
+                    <button type="submit">Log In</button>
+                </form>
+                <p>
+                    <span>Don't have an account?</span>
+                    <a href="/signup" class="pointer">Sign up here</a>
+                </p>
+                <p>
+                    <a href="/forgot-password" class="pointer">Forgot password?</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Login handler
+        async function loginUser(event) {
+            event.preventDefault();  // Prevent default form submission
+
+            const data = {
+                email: document.getElementById('login-email').value,
+                password: document.getElementById('login-password').value
+            };
+
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            alert(result.message || result.error);
+        }
+    </script>
+</body>
+</html>

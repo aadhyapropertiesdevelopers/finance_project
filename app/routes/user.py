@@ -48,6 +48,9 @@ from ..models.user import User
 from .. import db
 from werkzeug.security import generate_password_hash
 from app.utils.auth_decorators import token_required
+from flask_wtf.csrf import CSRFProtect
+
+csrf = CSRFProtect()
 
 bp = Blueprint('user', __name__)
 
@@ -58,10 +61,12 @@ def create_user():
     try:
         # Get data from request
         data = request.get_json()
-        username = data['username']
-        email = data['email']
-        password = data['password']
-        confirm_password = data['confirm_password']
+        print(f"Data received: {data}")
+        username = data.get('username')
+        email = data.get('email')
+        password = data.get('password')
+        confirm_password = data.get('confirm_password')
+        print(f"parsed data -Username: {username},Email:{email}")
 
         # Validate passwords match
         if password != confirm_password:
@@ -86,20 +91,20 @@ def create_user():
         return jsonify({"error": str(e)}), 400
 
 
-# GET method to fetch all users
-@bp.route('/user', methods=['GET'])
-# @token_required
-def get_users():
-    try:
-        # Query all users from the database
-        users = User.query.all()
+# # GET method to fetch all users
+# @bp.route('/user', methods=['GET'])
+# # @token_required
+# def get_users():
+#     try:
+#         # Query all users from the database
+#         users = User.query.all()
 
-        # Convert the result to a list of dictionaries
-        users_list = [{"id": user.id, "username": user.username, "email": user.email} for user in users]
+#         # Convert the result to a list of dictionaries
+#         users_list = [{"id": user.id, "username": user.username, "email": user.email} for user in users]
 
-        return jsonify(users_list), 200
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+#         return jsonify(users_list), 200
+#     except Exception as e:
+#         return jsonify({"error": str(e)}), 500
     
 
 #     # Login method
